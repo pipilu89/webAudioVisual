@@ -3,7 +3,7 @@ function Particle() {
   this.pos = createVector(random(width), random(height));
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
-  this.maxspeed = 4;
+  // this.maxspeed = 4;
   // this.red = 0;
   // this.green = 0;
   // this.blue = 255 / 2;
@@ -11,9 +11,10 @@ function Particle() {
 
   this.prevPos = this.pos.copy();
 
-  this.update = function () {
+  this.update = function (maxspeed) {
     this.vel.add(this.acc);
-    this.vel.limit(this.maxspeed);
+    // this.vel.limit(this.maxspeed);
+    this.vel.limit(maxspeed);
     this.pos.add(this.vel);
     this.acc.mult(0);
   };
