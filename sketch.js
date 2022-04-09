@@ -178,15 +178,29 @@ function draw() {
     zoff += zoffIncrementRangeValue
   }
 
+  //music
+  analyser.getByteFrequencyData(dataArray);
+  // analyser.getByteTimeDomainData(dataArray);
+  const xDiv = document.getElementById('x')
+  const yDiv = document.getElementById('y')
+  let speed2 = map(dataArray[100], 0, 255, 0, 4)
+  xDiv.innerText = speed2
+  yDiv.innerText = dataArray[25]
+
+
+  //particles
   for (let i = 0; i < particles.length; i++) {
     particles[i].follow(flowfield)
-    particles[i].update(maxSpeedRangeValue)
+    // particles[i].update(maxSpeedRangeValue)
+    particles[i].update(speed2)
     particles[i].edges()
-    particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue)
+    // particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, speed2)
+    particles[i].show(dataArray[100], dataArray[200], dataArray[20], alphaRangeValue, speed2)
 
 
   }
 
   fr.html(floor(frameRate()))
+
 }
 

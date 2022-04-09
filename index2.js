@@ -41,6 +41,7 @@ playButton.addEventListener('click', function () {
 function logFreqData() {
   analyser.getByteFrequencyData(dataArray)
   console.log('freq Data', dataArray);
+
 }
 
 // We also need to take into account what to do when the track finishes playing. Our HTMLMediaElement fires an ended event once it's finished playing, so we can listen for that and run code accordingly:
@@ -139,9 +140,14 @@ console.log('getByteFrequencyData', analyser.getByteFrequencyData(dataArray));
 track.connect(analyser);
 
 
-// Get a canvas defined with ID "oscilloscope"
-var canvas = document.getElementById("oscilloscope");
-var canvasCtx = canvas.getContext("2d");
+// // Get a canvas defined with ID "oscilloscope"
+// var canvas = document.getElementById("oscilloscope");
+// var canvasCtx = canvas.getContext("2d");
+
+
+
+
+
 
 // draw an oscilloscope of the current audio source
 
@@ -188,59 +194,35 @@ function draw2() {
 //new eg https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/frequencyBinCount
 analyser.fftSize = 256;
 // var bufferLength = analyser.frequencyBinCount;
-console.log(bufferLength);
+console.log('bufferLength', bufferLength);
 // var dataArray = new Uint8Array(bufferLength);
 const WIDTH = 800
 const HEIGHT = bufferLength * 2
 
-canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-
+// canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+let count = 1
 function draw() {
-  drawVisual = requestAnimationFrame(draw);
+  requestAnimationFrame(draw);
 
   analyser.getByteFrequencyData(dataArray);
 
-  canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-  // canvasCtx.fillStyle = `rgb(${dataArray[i]}, ${dataArray[i]}, ${dataArray[i]})`;
-  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+  // analyser.getByteTimeDomainData(dataArray);
+  const xDiv = document.getElementById('x')
+  const yDiv = document.getElementById('y')
 
-  var barWidth = (WIDTH / bufferLength) * 2.5 - 1;
-  var barHeight;
-  var x = 0;
+  xDiv.innerText = dataArray[100]
+  yDiv.innerText = dataArray[25]
+  // for (var i = 0; i < bufferLength; i++) {
 
-  for (var i = 0; i < bufferLength; i++) {
-    // barHeight = dataArray[i];
-    barHeight = dataArray[i] * (4);
+  //   // var v = dataArray[i];
+  //   var v = dataArray.length;
 
-    canvasCtx.fillStyle = 'rgb(' + (barHeight - (dataArray[i] * (3))) + ',50,50)';
-    // canvasCtx.fillStyle = `rgb(${(barHeight - (dataArray[i] * (3)))},${dataArray[i] / (dataArray[i] * 0.2)},${dataArray[i] / (dataArray[i] * 0.8)})`;
-    canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight / 2);
+  //   xDiv.innerText = bufferLength
+  //   yDiv.innerText = v
+  //   console.log('i: ', i, 'v:', v);
+  // }
 
-    x += barWidth;
-    //draw circle
-    // const centerX = canvas.width / 2;
-    const centerX = dataArray[i];
-    // const centerY = canvas.height / 2;
-    const centerY = dataArray[i];
-    const radius = 10;
-    if (i === 250) {
-      canvasCtx.beginPath();
-      // canvasCtx.arc(centerX, centerY, dataArray[i] / 1.5, 0, 2 * Math.PI, false);
-      canvasCtx.arc(centerX, centerY, dataArray[i] / 1.5, 0, 2);
-
-      // canvasCtx.fillStyle = 'green';
-      canvasCtx.fillStyle = `rgb(0, ${dataArray[i + 50] / 2}, ${dataArray[i + 100] / 2})`;
-      canvasCtx.fill();
-      canvasCtx.lineWidth = 5;
-      // canvasCtx.strokeStyle = '#003300';
-      canvasCtx.stroke();
-      canvasCtx.clearRect(centerX * 4, centerY, dataArray[i] - 50, dataArray[i]);
-
-      canvasCtx.fillStyle = `rgb(0, ${dataArray[i + 50] / 2}, ${dataArray[i + 100] / 2})`
-    }
-  }
-
-
+  // count++
 
 };
 
