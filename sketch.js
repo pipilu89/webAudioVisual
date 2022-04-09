@@ -133,6 +133,7 @@ function setup() {
     console.log('defaultValues');
   }, false);
 
+  //update UI
   function updateSliders() {
     magRange.value = magRangeValue
     magValueDiv.innerText = `Mag: ${magRangeValue}`
@@ -155,6 +156,9 @@ function setup() {
     maxSpeedRangeDiv.innerText = `maxSpeed: ${maxSpeedRangeValue}`
   }
 }
+
+
+
 
 function draw() {
   // background(255)
@@ -183,52 +187,60 @@ function draw() {
     yoff += xyIncrementRangeValue
     zoff += zoffIncrementRangeValue
   }
+  let speed2 //link for speed and music
+  if (linked) {
+    //music
+    analyser.getByteFrequencyData(dataArray);
+    // analyser.getByteTimeDomainData(dataArray);
+    const xDiv = document.getElementById('x')
+    const yDiv = document.getElementById('y')
+    speed2 = map(dataArray[100], 0, 255, 0, 5)
+    xDiv.innerText = speed2
+    yDiv.innerText = dataArray[25]
 
-  //music
-  analyser.getByteFrequencyData(dataArray);
-  // analyser.getByteTimeDomainData(dataArray);
-  const xDiv = document.getElementById('x')
-  const yDiv = document.getElementById('y')
-  let speed2 = map(dataArray[100], 0, 200, 0, 4)
-  xDiv.innerText = speed2
-  yDiv.innerText = dataArray[25]
+    //auto update sliders when linked to music
+    function updateSliders2() {
+      // magRange.value = magRangeValue
+      // magValueDiv.innerText = `Mag: ${magRangeValue}`
 
-  function updateSliders2() {
-    // magRange.value = magRangeValue
-    // magValueDiv.innerText = `Mag: ${magRangeValue}`
+      redRange.value = dataArray[100]
+      redRangeDiv.innerText = `red: ${redRange.value}`
+      greenRange.value = dataArray[200]
+      greenRangeDiv.innerText = `green: ${greenRange.value}`
+      blueRange.value = dataArray[20]
+      blueRangeDiv.innerText = `blue: ${blueRange.value}`
 
-    redRange.value = dataArray[100]
-    redRangeDiv.innerText = `red: ${redRange.value}`
-    greenRange.value = dataArray[200]
-    greenRangeDiv.innerText = `green: ${greenRange.value}`
-    blueRange.value = dataArray[20]
-    blueRangeDiv.innerText = `blue: ${blueRange.value}`
+      // alphaRange.value = alphaRangeValue
+      // alphaRangeDiv.innerText = `alpha: ${alphaRangeValue}`
+      // xyIncrementRange.value = xyIncrementRangeValue
+      // xyIncrementRangeDiv.innerText = `xyIncrement: ${xyIncrementRangeValue}`
+      // zoffIncrementRange.value = zoffIncrementRangeValue
+      // zoffIncrementRangeDiv.innerText = `zoffIncrement: ${zoffIncrementRangeValue}`
 
-    // alphaRange.value = alphaRangeValue
-    // alphaRangeDiv.innerText = `alpha: ${alphaRangeValue}`
-    // xyIncrementRange.value = xyIncrementRangeValue
-    // xyIncrementRangeDiv.innerText = `xyIncrement: ${xyIncrementRangeValue}`
-    // zoffIncrementRange.value = zoffIncrementRangeValue
-    // zoffIncrementRangeDiv.innerText = `zoffIncrement: ${zoffIncrementRangeValue}`
-
-    maxSpeedRange.value = speed2
-    maxSpeedRangeDiv.innerText = `maxSpeed: ${maxSpeedRange.value}`
+      maxSpeedRange.value = speed2
+      maxSpeedRangeDiv.innerText = `maxSpeed: ${maxSpeedRange.value}`
+    }
+    updateSliders2()
   }
-  updateSliders2()
+
 
   //particles
   for (let i = 0; i < particles.length; i++) {
     particles[i].follow(flowfield)
-    // particles[i].update(maxSpeedRangeValue)
-    particles[i].update(speed2)
     particles[i].edges()
-    // particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, speed2)
-    particles[i].show(dataArray[100], dataArray[200], dataArray[20], alphaRangeValue, speed2)
+    if (linked) {
+      particles[i].update(speed2)
+      particles[i].show(dataArray[150], dataArray[200], dataArray[20], alphaRangeValue, speed2)
+    } else {
+      particles[i].update(maxSpeedRangeValue)
+      particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue)
+    }
 
 
   }
 
   fr.html(floor(frameRate()))
 
+  // console.log('linked', linked);
 }
 

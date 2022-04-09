@@ -13,7 +13,7 @@ track.connect(audioContext.destination);
 
 // Now we can add the play and pause functionality.
 // select our play button
-const playButton = document.querySelector('button');
+const playButton = document.getElementById('playBtn');
 
 playButton.addEventListener('click', function () {
 
@@ -48,27 +48,45 @@ track.connect(analyser);
 
 
 analyser.fftSize = 2048;
-var bufferLength = analyser.frequencyBinCount;
-var dataArray = new Uint8Array(bufferLength);
+const bufferLength = analyser.frequencyBinCount;
+let dataArray = new Uint8Array(bufferLength);
 // analyser.getByteTimeDomainData(dataArray);
 // analyser.getFloatTimeDomainData(dataArray);
 // analyser.getByteFrequencyData(dataArray);
 
 
+//link / unlink music to draw
+let linked = true
 
-function draw() {
-  requestAnimationFrame(draw);
+const linkedInfo = document.getElementById('linkedInfo');
+const linkMusicBtn = document.getElementById('linkMusicBtn');
+linkMusicBtn.addEventListener('click', function () {
 
-  analyser.getByteFrequencyData(dataArray);
+  // link or unlink track depending on state
+  if (this.dataset.linked === 'false') {
+    this.dataset.linked = 'true';
+    linkedInfo.innerText = 'true'
+    linked = true
 
-  // analyser.getByteTimeDomainData(dataArray);
-  const xDiv = document.getElementById('x')
-  const yDiv = document.getElementById('y')
+  } else if (this.dataset.linked === 'true') {
 
-  xDiv.innerText = dataArray[1]
-  yDiv.innerText = dataArray[25]
+    this.dataset.linked = 'false';
+    linkedInfo.innerText = 'false'
+    linked = false
+  }
 
+}, false);
 
+// MEDIA
+list.onclick = function (e) {
+  e.preventDefault();
+
+  var elm = e.target;
+  var audio = document.getElementById('audio');
+
+  var source = document.getElementById('audioSource');
+  source.src = elm.getAttribute('data-value');
+
+  audio.load(); //call this to just preload the audio without playing
+  audio.play(); //call this to play the song right away
 };
-
-// draw();
