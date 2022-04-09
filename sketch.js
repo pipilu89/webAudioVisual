@@ -34,6 +34,12 @@ function defaultValues() {
 }
 defaultValues()
 
+//sliders
+const redRangeDiv = document.getElementById('redValue')
+const greenRangeDiv = document.getElementById('greenValue')
+const blueRangeDiv = document.getElementById('blueValue')
+const maxSpeedRangeDiv = document.getElementById('maxSpeedValue')
+
 function setup() {
   createCanvas(canvasW, canvasH);
   cols = floor(width / scl)
@@ -58,7 +64,7 @@ function setup() {
 
   //colours red green blue
   const redRange = document.getElementById('redRange')
-  const redRangeDiv = document.getElementById('redValue')
+  // const redRangeDiv = document.getElementById('redValue')
   redRangeDiv.innerText = `Red: ${redRangeValue}`
   redRange.addEventListener('input', function () {
     redRangeValue = (this.value * 1)
@@ -66,7 +72,7 @@ function setup() {
   }, false);
 
   const greenRange = document.getElementById('greenRange')
-  const greenRangeDiv = document.getElementById('greenValue')
+
   greenRangeDiv.innerText = `Green: ${greenRangeValue}`
   greenRange.addEventListener('input', function () {
     greenRangeValue = (this.value * 1)
@@ -74,7 +80,7 @@ function setup() {
   }, false);
 
   const blueRange = document.getElementById('blueRange')
-  const blueRangeDiv = document.getElementById('blueValue')
+
   blueRangeDiv.innerText = `Blue: ${blueRangeValue}`
   blueRange.addEventListener('input', function () {
     blueRangeValue = (this.value * 1)
@@ -107,7 +113,7 @@ function setup() {
   }, false);
 
   const maxSpeedRange = document.getElementById('maxSpeedRange')
-  const maxSpeedRangeDiv = document.getElementById('maxSpeedValue')
+
   maxSpeedRangeDiv.innerText = `maxSpeed: ${maxSpeedRangeValue}`
   maxSpeedRange.addEventListener('input', function () {
     maxSpeedRangeValue = (this.value * 1)
@@ -183,10 +189,32 @@ function draw() {
   // analyser.getByteTimeDomainData(dataArray);
   const xDiv = document.getElementById('x')
   const yDiv = document.getElementById('y')
-  let speed2 = map(dataArray[100], 0, 255, 0, 4)
+  let speed2 = map(dataArray[100], 0, 200, 0, 4)
   xDiv.innerText = speed2
   yDiv.innerText = dataArray[25]
 
+  function updateSliders2() {
+    // magRange.value = magRangeValue
+    // magValueDiv.innerText = `Mag: ${magRangeValue}`
+
+    redRange.value = dataArray[100]
+    redRangeDiv.innerText = `red: ${redRange.value}`
+    greenRange.value = dataArray[200]
+    greenRangeDiv.innerText = `green: ${greenRange.value}`
+    blueRange.value = dataArray[20]
+    blueRangeDiv.innerText = `blue: ${blueRange.value}`
+
+    // alphaRange.value = alphaRangeValue
+    // alphaRangeDiv.innerText = `alpha: ${alphaRangeValue}`
+    // xyIncrementRange.value = xyIncrementRangeValue
+    // xyIncrementRangeDiv.innerText = `xyIncrement: ${xyIncrementRangeValue}`
+    // zoffIncrementRange.value = zoffIncrementRangeValue
+    // zoffIncrementRangeDiv.innerText = `zoffIncrement: ${zoffIncrementRangeValue}`
+
+    maxSpeedRange.value = speed2
+    maxSpeedRangeDiv.innerText = `maxSpeed: ${maxSpeedRange.value}`
+  }
+  updateSliders2()
 
   //particles
   for (let i = 0; i < particles.length; i++) {
