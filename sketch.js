@@ -230,7 +230,7 @@ function draw() {
     particles[i].edges()
     if (linked) {
       particles[i].update(speed2)
-      particles[i].show(dataArray[150], dataArray[200], dataArray[20], alphaRangeValue, speed2)
+      particles[i].show(dataArray[150], dataArray[200], dataArray[50], alphaRangeValue, speed2)
     } else {
       particles[i].update(maxSpeedRangeValue)
       particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue)

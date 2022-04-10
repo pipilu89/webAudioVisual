@@ -11,29 +11,31 @@ const track = audioContext.createMediaElementSource(audioElement);
 
 track.connect(audioContext.destination);
 
+
+// NOT NEEDED BECAUSE USE CONTROLS
 // Now we can add the play and pause functionality.
 // select our play button
-const playButton = document.getElementById('playBtn');
+// const playButton = document.getElementById('playBtn');
 
-playButton.addEventListener('click', function () {
+// playButton.addEventListener('click', function () {
 
-  // check if context is in suspended state (autoplay policy)
-  if (audioContext.state === 'suspended') {
-    audioContext.resume();
-  }
+//   // check if context is in suspended state (autoplay policy)
+//   if (audioContext.state === 'suspended') {
+//     audioContext.resume();
+//   }
 
-  // play or pause track depending on state
-  if (this.dataset.playing === 'false') {
-    audioElement.play();
-    this.dataset.playing = 'true';
+//   // play or pause track depending on state
+//   if (this.dataset.playing === 'false') {
+//     audioElement.play();
+//     this.dataset.playing = 'true';
 
-    // console.log('freq Data', dataArray);
-  } else if (this.dataset.playing === 'true') {
-    audioElement.pause();
-    this.dataset.playing = 'false';
-  }
+//     // console.log('freq Data', dataArray);
+//   } else if (this.dataset.playing === 'true') {
+//     audioElement.pause();
+//     this.dataset.playing = 'false';
+//   }
 
-}, false);
+// }, false);
 
 // We also need to take into account what to do when the track finishes playing. Our HTMLMediaElement fires an ended event once it's finished playing, so we can listen for that and run code accordingly:
 audioElement.addEventListener('ended', () => {
@@ -78,15 +80,26 @@ linkMusicBtn.addEventListener('click', function () {
 }, false);
 
 // MEDIA
-list.onclick = function (e) {
-  e.preventDefault();
+// list.onclick = function (e) {
+//   e.preventDefault();
 
-  var elm = e.target;
-  var audio = document.getElementById('audio');
+//   var elm = e.target;
+//   var audio = document.getElementById('audio');
 
-  var source = document.getElementById('audioSource');
-  source.src = elm.getAttribute('data-value');
+//   var source = document.getElementById('audioSource');
+//   source.src = elm.getAttribute('data-value');
 
-  audio.load(); //call this to just preload the audio without playing
-  audio.play(); //call this to play the song right away
-};
+//   audio.load(); //call this to just preload the audio without playing
+//   audio.play(); //call this to play the song right away
+// };
+
+// MEDIA2
+var selectMediaInput = document.querySelector("select");
+var audio = document.getElementById("audio1");
+var source = audio.querySelector("source");
+selectMediaInput.onchange = function () {
+  audio.pause();
+  source.src = this.value;
+  audio.load();
+  // audio.play();
+}
