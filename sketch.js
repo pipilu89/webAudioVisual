@@ -194,7 +194,7 @@ function draw() {
     // analyser.getByteTimeDomainData(dataArray);
     const xDiv = document.getElementById('x')
     const yDiv = document.getElementById('y')
-    speed2 = map(dataArray[100], 0, 255, 0, 5)
+    speed2 = map(dataArray[64], 0, 255, 0, 5)
     xDiv.innerText = speed2
     yDiv.innerText = dataArray[25]
 
@@ -203,11 +203,11 @@ function draw() {
       // magRange.value = magRangeValue
       // magValueDiv.innerText = `Mag: ${magRangeValue}`
 
-      redRange.value = dataArray[100]
+      redRange.value = dataArray[0]
       redRangeDiv.innerText = `red: ${redRange.value}`
-      greenRange.value = dataArray[200]
+      greenRange.value = dataArray[18]
       greenRangeDiv.innerText = `green: ${greenRange.value}`
-      blueRange.value = dataArray[20]
+      blueRange.value = dataArray[54]
       blueRangeDiv.innerText = `blue: ${blueRange.value}`
 
       // alphaRange.value = alphaRangeValue
@@ -230,7 +230,7 @@ function draw() {
     particles[i].edges()
     if (linked) {
       particles[i].update(speed2)
-      particles[i].show(dataArray[150], dataArray[200], dataArray[50], alphaRangeValue, speed2)
+      particles[i].show(dataArray[0], dataArray[18], dataArray[54], alphaRangeValue, speed2)
     } else {
       particles[i].update(maxSpeedRangeValue)
       particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue)

@@ -1,3 +1,9 @@
 link / unlink music to draw
 
 select music
+
+
+
+//the frequency bands are split equally, so each element N of your array corresponds to:
+
+N * samplerate/fftSize
