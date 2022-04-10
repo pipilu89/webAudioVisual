@@ -22,6 +22,8 @@ let blueRangeValue //input field
 let alphaRangeValue  //input field
 let zoffIncrementRangeValue
 let maxSpeedRangeValue
+let strokeWeightDefault = 1
+let strokeWeightLink = 1
 
 function defaultValues() {
   magRangeValue = 1 //input field
@@ -215,7 +217,7 @@ function draw() {
     xDiv.innerText = speed2
     yDiv.innerText = dataArray[25]
 
-
+    strokeWeightLink = map(dataArray[91], 0, 255, 1, 10)
     // zoffIncLink = map(dataArray[1], 0, 255, 0.0003, 0.001)
 
 
@@ -232,7 +234,7 @@ function draw() {
       blueRangeDiv.innerText = `blue: ${blueRange.value}`
 
       // alphaRange.value = dataArray[5]
-      alphaRange.value = map(dataArray[50], 0, 255, 0.5, 150)
+      alphaRange.value = map(dataArray[50], 0, 255, 0.5, 50)
       alphaRangeDiv.innerText = `alpha: ${alphaRange.value}`
 
       // xyIncrementRange.value = xyIncrementRangeValue
@@ -254,10 +256,10 @@ function draw() {
     particles[i].edges()
     if (linked) {
       particles[i].update(speed2)
-      particles[i].show(dataArray[0], dataArray[18], dataArray[54], map(dataArray[50], 0, 255, 0.5, 150), speed2)
+      particles[i].show(dataArray[0], dataArray[18], dataArray[54], map(dataArray[50], 0, 255, 0.5, 50), speed2, strokeWeightLink)
     } else {
       particles[i].update(maxSpeedRangeValue)
-      particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue)
+      particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue, strokeWeightDefault)
     }
 
 

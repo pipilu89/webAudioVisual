@@ -31,7 +31,7 @@ function Particle() {
     this.acc.add(force);
   };
 
-  this.show = function (particleRedColor, particleGreenColor, particleBlueColor, particleAlpha, maxspeed) {
+  this.show = function (particleRedColor, particleGreenColor, particleBlueColor, particleAlpha, maxspeed, strokeWeightLink) {
 
     if (maxspeed == 0) {
       // stroke(0)
@@ -39,7 +39,7 @@ function Particle() {
     } else {
       stroke(particleRedColor, particleGreenColor, particleBlueColor, particleAlpha);
       // stroke(0, 5)
-      strokeWeight(1);
+      strokeWeight(strokeWeightLink);
       line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
       this.updatePrev();
 
