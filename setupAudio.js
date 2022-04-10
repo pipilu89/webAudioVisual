@@ -49,8 +49,10 @@ const analyser = audioContext.createAnalyser();
 track.connect(analyser);
 
 
-analyser.fftSize = 2048;
+// analyser.fftSize = 2048; //better for oscilloscope 
+analyser.fftSize = 256;  //better for winamp spectrum
 const bufferLength = analyser.frequencyBinCount;
+console.log('bufferLength: ', bufferLength, ' fftSize:', analyser.fftSize, 'sampleRate: ', audioContext.sampleRate);
 let dataArray = new Uint8Array(bufferLength);
 // analyser.getByteTimeDomainData(dataArray);
 // analyser.getFloatTimeDomainData(dataArray);
@@ -94,9 +96,9 @@ linkMusicBtn.addEventListener('click', function () {
 // };
 
 // MEDIA2
-var selectMediaInput = document.querySelector("select");
-var audio = document.getElementById("audio1");
-var source = audio.querySelector("source");
+const selectMediaInput = document.querySelector("select");
+const audio = document.getElementById("audio1");
+const source = audio.querySelector("source");
 selectMediaInput.onchange = function () {
   audio.pause();
   source.src = this.value;
