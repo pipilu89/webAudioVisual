@@ -39,6 +39,8 @@ const redRangeDiv = document.getElementById('redValue')
 const greenRangeDiv = document.getElementById('greenValue')
 const blueRangeDiv = document.getElementById('blueValue')
 const maxSpeedRangeDiv = document.getElementById('maxSpeedValue')
+const alphaRangeDiv = document.getElementById('alphaValue')
+// const zoffIncrementRangeDiv = document.getElementById('zoffIncrementValue')
 
 function setup() {
   createCanvas(canvasW, canvasH);
@@ -162,6 +164,14 @@ function setup() {
 
 function draw() {
   // background(255)
+  let speed2 //link for speed and music
+  let zoffIncLink //link for zoff and music
+  if (linked) {
+    //music
+    analyser.getByteFrequencyData(dataArray);
+    // analyser.getByteTimeDomainData(dataArray);
+    // zoffIncLink = map(dataArray[127], 0, 255, 0, 0.05)
+  }
   let yoff = 0
   for (let y = 0; y < rows; y++) {
     let xoff = 0
@@ -185,18 +195,29 @@ function draw() {
 
     }
     yoff += xyIncrementRangeValue
-    zoff += zoffIncrementRangeValue
+    if (linked) {
+      // zoff += zoffIncLink
+      zoff += zoffIncrementRangeValue
+    }
+    else {
+      zoff += zoffIncrementRangeValue
+    }
   }
-  let speed2 //link for speed and music
+
   if (linked) {
     //music
-    analyser.getByteFrequencyData(dataArray);
+    // analyser.getByteFrequencyData(dataArray);
     // analyser.getByteTimeDomainData(dataArray);
     const xDiv = document.getElementById('x')
     const yDiv = document.getElementById('y')
-    speed2 = map(dataArray[64], 0, 255, 0, 5)
+
+    speed2 = map(dataArray[1], 0, 255, 1, 4)
     xDiv.innerText = speed2
     yDiv.innerText = dataArray[25]
+
+
+    // zoffIncLink = map(dataArray[1], 0, 255, 0.0003, 0.001)
+
 
     //auto update sliders when linked to music
     function updateSliders2() {
@@ -210,12 +231,15 @@ function draw() {
       blueRange.value = dataArray[54]
       blueRangeDiv.innerText = `blue: ${blueRange.value}`
 
-      // alphaRange.value = alphaRangeValue
-      // alphaRangeDiv.innerText = `alpha: ${alphaRangeValue}`
+      // alphaRange.value = dataArray[5]
+      alphaRange.value = map(dataArray[50], 0, 255, 0.5, 150)
+      alphaRangeDiv.innerText = `alpha: ${alphaRange.value}`
+
       // xyIncrementRange.value = xyIncrementRangeValue
       // xyIncrementRangeDiv.innerText = `xyIncrement: ${xyIncrementRangeValue}`
-      // zoffIncrementRange.value = zoffIncrementRangeValue
-      // zoffIncrementRangeDiv.innerText = `zoffIncrement: ${zoffIncrementRangeValue}`
+
+      // zoffIncrementRange.value = zoffIncLink.toFixed(5)
+      // zoffIncrementRangeDiv.innerText = `zoffIncrement: ${zoffIncrementRange.value}`
 
       maxSpeedRange.value = speed2
       maxSpeedRangeDiv.innerText = `maxSpeed: ${maxSpeedRange.value}`
@@ -230,7 +254,7 @@ function draw() {
     particles[i].edges()
     if (linked) {
       particles[i].update(speed2)
-      particles[i].show(dataArray[0], dataArray[18], dataArray[54], alphaRangeValue, speed2)
+      particles[i].show(dataArray[0], dataArray[18], dataArray[54], map(dataArray[50], 0, 255, 0.5, 150), speed2)
     } else {
       particles[i].update(maxSpeedRangeValue)
       particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue)

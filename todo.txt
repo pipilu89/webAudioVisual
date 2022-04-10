@@ -2,6 +2,11 @@ link / unlink music to draw
 
 select music
 
+link bass frequency to alpha
+
+overall db- average all frqs - increase stroke weight
+
+zoom in out of canvas?
 
 
 //the frequency bands are split equally, so each element N of your array corresponds to:
