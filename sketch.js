@@ -14,7 +14,7 @@ let particles = []
 
 let flowfield
 
-let backgroundColourVariable = 255
+let backgroundColourVariable = '#000'
 let colorPicker;
 
 //default values
@@ -54,7 +54,7 @@ function setup() {
   cols = floor(width / scl)
   rows = floor(height / scl)
 
-  colorPicker = createColorPicker('#ffffff')
+  colorPicker = createColorPicker(backgroundColourVariable)
   colorPicker.id('colourPickerInput');
   colorPicker.parent('frameRateDiv');
   // colorPicker.position(0, height + 5);
