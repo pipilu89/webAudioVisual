@@ -237,9 +237,13 @@ function draw() {
     xDiv.innerText = speed2
     yDiv.innerText = dataArray[25]
 
-    strokeWeightLink = map(dataArray[91], 0, 255, 1, 10)
+    strokeWeightLink = map(dataArray[91], 0, 255, 1, 20)
     // zoffIncLink = map(dataArray[1], 0, 255, 0.0003, 0.001)
 
+    //clear background if threshold
+    if (dataArray[91] > 100) {
+      background(colorPicker.color())
+    }
 
     //auto update sliders when linked to music
     function updateSliders2() {
