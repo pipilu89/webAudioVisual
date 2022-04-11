@@ -1,7 +1,7 @@
 // let xoff1=0
 // let xoff2 =1000
-let canvasW = 800
-let canvasH = 600
+// let canvasW = 800
+// let canvasH = 600
 let xyIncrementRangeValue = 0.1
 let scl = 10
 let cols, rows
@@ -13,6 +13,9 @@ let fr
 let particles = []
 
 let flowfield
+
+let backgroundColourVariable = 255
+let colorPicker;
 
 //default values
 let magRangeValue  //input field
@@ -45,17 +48,27 @@ const alphaRangeDiv = document.getElementById('alphaValue')
 // const zoffIncrementRangeDiv = document.getElementById('zoffIncrementValue')
 
 function setup() {
-  createCanvas(canvasW, canvasH);
+  // createCanvas(canvasW, canvasH);
+  createCanvas(windowWidth, windowHeight);
+  background(backgroundColourVariable)
   cols = floor(width / scl)
   rows = floor(height / scl)
-  fr = createP('')
+
+  colorPicker = createColorPicker('#ffffff')
+  colorPicker.id('colourPickerInput');
+  colorPicker.parent('frameRateDiv');
+  // colorPicker.position(0, height + 5);
+  backgroundColourVariable = colorPicker.color()
+  background(colorPicker.color())
+
+  fr = createDiv('')
+  fr.parent('frameRateDiv');
 
   flowfield = new Array(cols * rows)
 
   for (let i = 0; i < 1000; i++) {
     particles[i] = new Particle()
   }
-  background(255)
 
   //INPUTS
   const magRange = document.getElementById('magRange')
@@ -127,8 +140,15 @@ function setup() {
   //buttons
   const clearBackgroundBtn = document.getElementById('clearBackground')
   clearBackgroundBtn.addEventListener('click', function () {
-    background(255)
+    background(colorPicker.color())
     console.log('clear background');
+
+  }, false);
+
+  const colourPickerInput = document.getElementById('colourPickerInput')
+  colourPickerInput.addEventListener('input', function () {
+    background(colorPicker.color())
+    console.log('change background colour');
   }, false);
   const defaultValuesBtn = document.getElementById('defaultValuesBtn')
   defaultValuesBtn.addEventListener('click', function () {
@@ -265,8 +285,26 @@ function draw() {
 
   }
 
-  fr.html(floor(frameRate()))
+  fr.html(`frame rate: ${floor(frameRate())}`)
 
+  // fr.parent('controls');
+  // fr.html(floor(frameRate()))
   // console.log('linked', linked);
+
+  // let div = createDiv('').size(100, 100);
+  // div.html('hi');
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  background(colorPicker.color())
+  // console.log('resized window');
+}
+
+// Clicking toggles fullscreen on and off.
+const fullScreenBtn = document.getElementById('fullScreenBtn')
+fullScreenBtn.addEventListener('click', () => {
+  let fs = fullscreen();
+  fullscreen(!fs);
+
+})

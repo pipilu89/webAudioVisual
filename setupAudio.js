@@ -103,5 +103,5 @@ selectMediaInput.onchange = function () {
   audio.pause();
   source.src = this.value;
   audio.load();
-  // audio.play();
+  audio.play();
 }

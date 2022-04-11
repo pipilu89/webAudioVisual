@@ -13,46 +13,53 @@
 </head>
 
 <body>
-  <!-- MEDIA2 -->
-  <select id="selectMediaInput">
-    <option>Select audio to play</option>
-    <option value="./music/JuniorBoys-DoubleShadow.mp3">JuniorBoys-DoubleShadow.mp3</option>
-    <option value="./music/TribeofIssachar-TribalNatty.mp3">TribeofIssachar-TribalNatty.mp3</option>
-    <option value="./music/bensound-creativeminds.mp3">bensound-creativeminds</option>
-  </select>
-
-  <!-- <audio id='audio1' src="bensound-creativeminds.mp3" controls="controls"> -->
-  <audio id='audio1' controls="controls">
-    <source id="audioSourceAside">
-  </audio>
-
-  <!--gain <input type="range" id="volumeInput" min="-1" max="1" value="0" step="0.1">
-  pan
-  <input type="range" id="panner" min="-1" max="1" value="0" step="0.1">
-  fftSize<input type="range" id="fftSize" min="5" max="15" value="11" step="1"> -->
-
-  <!-- <button id="playBtn" data-playing="false" role="switch" aria-checked="false">
-    <span>Play/Pause</span>
-  </button>
-  <button id="mute">
-    <span>mute</span>
-  </button> -->
-
-  <button id="linkMusicBtn" data-linked="true" role="switch">
-    <span>link/unlink music</span>
-  </button>
-  linked:
-  <span id="linkedInfo">true</span>
-
-
-  <!-- <div id="currentTime">time</div> -->
-  <!-- <button id="updateTime">update time</button> -->
-  <div id="x"></div>
-  <div id="y"></div>
-  <!-- <canvas id="oscilloscope" width="800" height="400"></canvas> -->
 
   <!-- p5 -->
-  <div class="controls">
+  <div class="controls" id="controls">
+    <!-- MEDIA2 -->
+    <div>
+      <select id="selectMediaInput">
+        <option>Select audio to play</option>
+        <option value="./music/JuniorBoys-DoubleShadow.mp3">JuniorBoys-DoubleShadow.mp3</option>
+        <option value="./music/TribeofIssachar-TribalNatty.mp3">TribeofIssachar-TribalNatty.mp3</option>
+        <option value="./music/bensound-creativeminds.mp3">bensound-creativeminds</option>
+      </select>
+    </div>
+
+    <!-- <audio id='audio1' src="bensound-creativeminds.mp3" controls="controls"> -->
+    <div>
+      <audio id='audio1' controls style="width: 200px;">
+        <!-- <audio id='audio1' controls="controls" style="width: 200px;"> -->
+        <source id="audioSourceAside">
+      </audio>
+    </div>
+
+    <!--gain <input type="range" id="volumeInput" min="-1" max="1" value="0" step="0.1">
+    pan
+    <input type="range" id="panner" min="-1" max="1" value="0" step="0.1">
+    fftSize<input type="range" id="fftSize" min="5" max="15" value="11" step="1"> -->
+
+    <!-- <button id="playBtn" data-playing="false" role="switch" aria-checked="false">
+      <span>Play/Pause</span>
+    </button>
+    <button id="mute">
+      <span>mute</span>
+    </button> -->
+
+    <button id="linkMusicBtn" data-linked="true" role="switch">
+      <span>link/unlink music</span>
+    </button>
+    linked:
+    <span id="linkedInfo">true</span>
+    <br>
+    <br>
+    <hr>
+
+    <!-- <div id="currentTime">time</div> -->
+    <!-- <button id="updateTime">update time</button> -->
+    <div id="x"></div>
+    <div id="y"></div>
+    <!-- <canvas id="oscilloscope" width="800" height="400"></canvas> -->
     <div id="magValue">Mag</div> <input type="range" id="magRange" min="0" max="10" value="1" step="0.1">
     <div id="redValue">red</div> <input type="range" id="redRange" min="0" max="255" value="0" step="1">
     <div id="greenValue">green</div> <input type="range" id="greenRange" min="0" max="255" value="0" step="1">
@@ -67,10 +74,15 @@
       <button id="clearBackground">clearBackground</button>
       <button id="defaultValuesBtn">defaultValues</button>
     </div>
-  </div>
+    <div>
+      <button id="backgroundColourSelect">background colour</button>
+      <button id="fullScreenBtn">fullScreen</button>
+    </div>
 
-  <!-- media -->
-  <!-- <h3>Media</h3>
+    <div id="frameRateDiv"> </div>
+
+    <!-- media -->
+    <!-- <h3>Media</h3>
   <ul style="list-style: none">
     <li>Audio Files
       <ul id="list">
@@ -92,7 +104,7 @@
   </audio> -->
 
 
-  <!-- <audio id="audio4" controls>
+    <!-- <audio id="audio4" controls>
     <source id="audioSourceAside">
   </audio> -->
 
