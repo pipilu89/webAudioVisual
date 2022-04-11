@@ -16,6 +16,7 @@ let flowfield
 
 let backgroundColourVariable = '#000'
 let colorPicker;
+let fileInput;
 
 //default values
 let magRangeValue  //input field
@@ -57,9 +58,12 @@ function setup() {
   colorPicker = createColorPicker(backgroundColourVariable)
   colorPicker.id('colourPickerInput');
   colorPicker.parent('frameRateDiv');
-  // colorPicker.position(0, height + 5);
+
   backgroundColourVariable = colorPicker.color()
   background(colorPicker.color())
+
+  fileInput = createFileInput(handleFile);
+  fileInput.parent('fileSelectInput');
 
   fr = createDiv('')
   fr.parent('frameRateDiv');
@@ -233,15 +237,15 @@ function draw() {
     const xDiv = document.getElementById('x')
     const yDiv = document.getElementById('y')
 
-    speed2 = map(dataArray[1], 0, 255, 1, 4)
+    speed2 = map(dataArray[20], 0, 255, 1, 16)
     xDiv.innerText = speed2
     yDiv.innerText = dataArray[25]
 
-    strokeWeightLink = map(dataArray[91], 0, 255, 1, 20)
+    strokeWeightLink = map(dataArray[32], 0, 255, 1, 20)
     // zoffIncLink = map(dataArray[1], 0, 255, 0.0003, 0.001)
 
     //clear background if threshold
-    if (dataArray[91] > 100) {
+    if (dataArray[3] > 200) {
       background(colorPicker.color())
     }
 
@@ -250,11 +254,11 @@ function draw() {
       // magRange.value = magRangeValue
       // magValueDiv.innerText = `Mag: ${magRangeValue}`
 
-      redRange.value = dataArray[0]
+      redRange.value = dataArray[60]
       redRangeDiv.innerText = `red: ${redRange.value}`
-      greenRange.value = dataArray[18]
+      greenRange.value = dataArray[2]
       greenRangeDiv.innerText = `green: ${greenRange.value}`
-      blueRange.value = dataArray[54]
+      blueRange.value = dataArray[4]
       blueRangeDiv.innerText = `blue: ${blueRange.value}`
 
       // alphaRange.value = dataArray[5]
@@ -280,7 +284,7 @@ function draw() {
     particles[i].edges()
     if (linked) {
       particles[i].update(speed2)
-      particles[i].show(dataArray[0], dataArray[18], dataArray[54], map(dataArray[50], 0, 255, 0.5, 50), speed2, strokeWeightLink)
+      particles[i].show(dataArray[60], dataArray[2], dataArray[4], map(dataArray[50], 0, 255, 0.5, 50), speed2, strokeWeightLink)
     } else {
       particles[i].update(maxSpeedRangeValue)
       particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue, strokeWeightDefault)
@@ -312,3 +316,17 @@ fullScreenBtn.addEventListener('click', () => {
   fullscreen(!fs);
 
 })
+
+
+//file input dialog function
+function handleFile(file) {
+  print(file);
+  if (file.type === 'audio') {
+    source.src = file.data;
+    audio.load();
+    audio.play();
+    console.log('file.type =audio');
+  } else {
+    console.log('file.type NOT audio');
+  }
+}

@@ -1,8 +1,6 @@
-link / unlink music to draw
-
-select music
-
-link bass frequency to alpha
+HSL colour for more dynamic change of colour?
+background color change with music intensity?
+instrument frequency chart- another page?
 
 overall db- average all frqs - increase stroke weight
 
@@ -10,6 +8,15 @@ zoom in out of canvas?
 
 backgorund colour option
 
+presets
+UI to connect ATTRIBUTES eg red=>140hz
+
+INFO===
 //the frequency bands are split equally, so each element N of your array corresponds to:
 
 N * samplerate/fftSize
+
+Done====
+link / unlink music to draw
+link bass frequency to alpha
+select music
