@@ -1,3 +1,16 @@
+// import { Slider } from './ui.js'
+
+let id1 = 'testslider'
+let id2 = 'testslider2'
+let s = new Slider(id1, 0, 10, 1, 1, 'test')
+let s2 = new Slider(id2, 0, 10, 1, 1, 'test2')
+document.getElementById('sliderDiv').innerHTML = s.render()
+s.eventListen()
+document.getElementById('sliderDiv2').innerHTML = s2.render()
+s2.eventListen()
+
+//---
+
 // let xoff1=0
 // let xoff2 =1000
 // let canvasW = 800
