@@ -1,3 +1,77 @@
+let sliderArray = []
+let sliderObjArray = [
+  {
+    id: 'StrokeWeight',
+    min: 0,
+    max: 20,
+    value: 1,
+    step: 0.1
+  },
+  {
+    id: 'Magnitude',
+    min: 0,
+    max: 10,
+    value: 1,
+    step: 0.1
+  },
+  {
+    id: 'Red',
+    min: 0,
+    max: 255,
+    value: 0,
+    step: 1
+  },
+  {
+    id: 'Green',
+    min: 0,
+    max: 255,
+    value: 0,
+    step: 1
+  },
+  {
+    id: 'Blue',
+    min: 0,
+    max: 255,
+    value: 0,
+    step: 1
+  },
+  {
+    id: 'Alpha',
+    min: 0,
+    max: 20,
+    value: 5,
+    step: 1
+  },
+  {
+    id: 'xyIncrement',
+    min: 0,
+    max: 1,
+    value: 0.1,
+    step: 0.001
+  },
+  {
+    id: 'zoffIncrement',
+    min: 0,
+    max: 2,
+    value: 0.0003,
+    step: 0.0001
+  },
+  {
+    id: 'MaxSpeed',
+    min: 0,
+    max: 20,
+    value: 4,
+    step: 0.1
+  },
+  {
+    id: 'test34',
+    min: 0,
+    max: 20,
+    value: 1,
+    step: 0.1
+  }
+]
+
 class Slider {
   constructor(id, min, max, value, step) {
     this.id = id;
@@ -18,30 +92,19 @@ class Slider {
 
     /* Event listener */
     document.getElementById(`${this.id}Slider`).addEventListener("input", (e) => {
-      this.newValue = e.target.value
-      // console.log(this.newValue);
+      this.newValue = (e.target.value * 1)
+      console.log(this.newValue, typeof (this.newValue));
       document.getElementById(`${this.id}Div`).innerText = `${this.id}:${this.newValue}`
     }, false);
   }
 
 }
 
-// /* Selecting DOM element */
-// const button2 = document.getElementById(id1);
+// constructor(id, min, max, value, step)
+for (let i = 0; i < sliderObjArray.length; i++) {
 
-// /* Callback function */
-// function alertButton() {
-//   alert('Hi native JavaScript');
-// }
+  sliderArray[i] = new Slider(sliderObjArray[i].id, sliderObjArray[i].min, sliderObjArray[i].max, sliderObjArray[i].value, sliderObjArray[i].step)
+  document.getElementById('sliderDiv').insertAdjacentHTML('beforeend', sliderArray[i].render())
+  sliderArray[i].eventListen()
+}
 
-// /* Event listener */
-// button2.addEventListener("input", alertButton, false);
-
-//     //INPUTS
-//     const magRange = document.getElementById('magRange')
-//     const magValueDiv = document.getElementById('magValue')
-//     magValueDiv.innerText = `Mag: ${magRangeValue}`
-//     magRange.addEventListener('input', function () {
-//       magRangeValue = (this.value * 1)
-//       magValueDiv.innerText = `Mag: ${magRangeValue}`
-//     }, false);
