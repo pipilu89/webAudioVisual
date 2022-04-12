@@ -1,13 +1,41 @@
 // import { Slider } from './ui.js'
 
-let id1 = 'testslider'
-let id2 = 'testslider2'
-let s = new Slider(id1, 0, 10, 1, 1, 'test')
-let s2 = new Slider(id2, 0, 10, 1, 1, 'test2')
-document.getElementById('sliderDiv').innerHTML = s.render()
-s.eventListen()
-document.getElementById('sliderDiv2').innerHTML = s2.render()
-s2.eventListen()
+let sliderArray = []
+let sliderObjArray = [
+  {
+    id: 'StrokeWeight',
+    min: 0,
+    max: 20,
+    value: 1,
+    step: 0.1
+  },
+  {
+    id: 'test34',
+    min: 0,
+    max: 20,
+    value: 1,
+    step: 0.1
+  },
+]
+
+// constructor(id, min, max, value, step)
+for (let i = 0; i < sliderObjArray.length; i++) {
+
+  sliderArray[i] = new Slider(sliderObjArray[i].id, sliderObjArray[i].min, sliderObjArray[i].max, sliderObjArray[i].value, sliderObjArray[i].step)
+  document.getElementById('sliderDiv').insertAdjacentHTML('beforeend', sliderArray[i].render())
+  sliderArray[i].eventListen()
+}
+
+
+// let s2 = new Slider(sliderIdArray[1], 0, 10, 1, 1)
+// document.getElementById('sliderDiv').innerHTML = StrokeWeight.render()
+// StrokeWeight.eventListen()
+// console.log(StrokeWeight);
+// // with .insertAdjacentHTML, preserves event listeners
+// document.getElementById('sliderDiv').insertAdjacentHTML('beforeend', s2.render());
+
+// // document.getElementById('sliderDiv2').innerHTML = s2.render()
+// s2.eventListen()
 
 //---
 
@@ -202,6 +230,7 @@ function setup() {
 
 
 function draw() {
+  // console.log('s', s.newValue);
   // background(255)
   let speed2 //link for speed and music
   let zoffIncLink //link for zoff and music
@@ -300,7 +329,8 @@ function draw() {
       particles[i].show(dataArray[60], dataArray[2], dataArray[4], map(dataArray[50], 0, 255, 0.5, 50), speed2, strokeWeightLink)
     } else {
       particles[i].update(maxSpeedRangeValue)
-      particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue, strokeWeightDefault)
+      particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue, sliderArray[0].newValue)
+      // particles[i].show(redRangeValue, greenRangeValue, blueRangeValue, alphaRangeValue, maxSpeedRangeValue, strokeWeightDefault)
     }
 
 

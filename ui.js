@@ -1,22 +1,26 @@
 class Slider {
-  constructor(id, min, max, value, step, label) {
+  constructor(id, min, max, value, step) {
     this.id = id;
     this.min = min;
     this.max = max;
     this.value = value;
     this.step = step;
-    this.label = label;
+
   }
 
   render() {
-    return `<input type="range" id="${this.id}" min="${this.min}" max="${this.max}" value="${this.value}" step="${this.step}">
-    <label for="${this.id}">${this.label}</label>`
+    this.newValue = this.value
+    return `<div><div id="${this.id}Div">${this.id}:${this.newValue}</div>
+    <input type="range" id="${this.id}Slider" min="${this.min}" max="${this.max}" value="${this.value}" step="${this.step}"></div>`
   }
 
   eventListen() {
+
     /* Event listener */
-    document.getElementById(this.id).addEventListener("input", (e) => {
-      console.log(e.target.value);
+    document.getElementById(`${this.id}Slider`).addEventListener("input", (e) => {
+      this.newValue = e.target.value
+      // console.log(this.newValue);
+      document.getElementById(`${this.id}Div`).innerText = `${this.id}:${this.newValue}`
     }, false);
   }
 
