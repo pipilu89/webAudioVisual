@@ -13,7 +13,8 @@ let sliderObjArray = [
     min: 0,
     max: 10,
     value: 1,
-    step: 0.1
+    step: 0.1,
+    link: 10,    //dataArray[x]
   },
   {
     id: 'Red',
@@ -43,7 +44,7 @@ let sliderObjArray = [
   {
     id: 'Alpha',
     min: 0,
-    max: 20,
+    max: 10,
     value: 5,
     step: 1,
     link: 2,    //dataArray[x]
@@ -54,13 +55,18 @@ let sliderObjArray = [
     max: 1,
     value: 0.1,
     step: 0.001
+    // link: 90
+    // ,
+    // gradient: 1
   },
   {
     id: 'zoffIncrement',
     min: 0,
-    max: 2,
+    // max: 2,
+    max: 0.0005,
     value: 0.0003,
-    step: 0.0001
+    step: 0.0001,
+    link: 80
   },
   {
     id: 'MaxSpeed',
@@ -94,7 +100,7 @@ class Slider {
     /* Event listener */
     document.getElementById(`${this.id}Slider`).addEventListener("input", (e) => {
       this.newValue = (e.target.value * 1)
-      console.log(this.newValue, typeof (this.newValue));
+      // console.log(this.newValue, typeof (this.newValue));
       document.getElementById(`${this.id}Div`).innerText = `${this.id}:${this.newValue}`
     }, false);
   }
@@ -104,8 +110,20 @@ class Slider {
     if (this.link) {
       this.newValue = map(dataArray[this.link], 0, 255, this.min, this.max)
       document.getElementById(`${this.id}Slider`).value = this.newValue
+      document.getElementById(`${this.id}Div`).innerText = `${this.id}: ${this.newValue.toFixed(5)}`
+    }
+    if (this.gradient) {
+      this.newValue = 1
+      document.getElementById(`${this.id}Slider`).value = this.newValue
       document.getElementById(`${this.id}Div`).innerText = `${this.id}: ${this.newValue}`
     }
+  }
+
+  //default values
+  defaultValues() {
+    this.newValue = this.value
+    document.getElementById(`${this.id}Slider`).value = this.value
+    document.getElementById(`${this.id}Div`).innerText = `${this.id}: ${this.value}`
   }
 }
 
