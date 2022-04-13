@@ -285,7 +285,10 @@ function draw() {
       // maxSpeedRange.value = speed2
       // maxSpeedRangeDiv.innerText = `maxSpeed: ${maxSpeedRange.value}`
     }
-    updateSliders2()
+    // updateSliders2()
+    for (let i = 0; i < sliderArray.length; i++) {
+      sliderArray[i].updateLinkedUI()
+    }
   }
 
 
@@ -294,8 +297,11 @@ function draw() {
     particles[i].follow(flowfield)
     particles[i].edges()
     if (linked) {
-      particles[i].update(speed2)
-      particles[i].show(dataArray[60], dataArray[2], dataArray[4], map(dataArray[50], 0, 255, 0.5, 50), speed2, strokeWeightLink)
+      // particles[i].update(speed2)
+      particles[i].update(sliderArray[8].newValue)
+      particles[i].show(sliderArray[2].newValue, sliderArray[3].newValue, sliderArray[4].newValue, sliderArray[5].newValue, sliderArray[8].newValue, sliderArray[0].newValue)
+      // particles[i].show(dataArray[60], dataArray[2], dataArray[4], map(dataArray[50], 0, 255, 0.5, 50), speed2, strokeWeightLink)
+      // console.log('sliderArray[2].value', sliderArray[2].value);
     } else {
       particles[i].update(sliderArray[8].newValue)
       // particles[i].update(sliderArray[8].newValue)
@@ -338,6 +344,7 @@ function handleFile(file) {
     source.src = file.data;
     audio.load();
     audio.play();
+    console.log('source.src', source.src);
     console.log('file.type =audio');
   } else {
     console.log('file.type NOT audio');

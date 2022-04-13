@@ -5,7 +5,8 @@ let sliderObjArray = [
     min: 0,
     max: 20,
     value: 1,
-    step: 0.1
+    step: 0.1,
+    link: 50,    //dataArray[x]
   },
   {
     id: 'Magnitude',
@@ -19,28 +20,33 @@ let sliderObjArray = [
     min: 0,
     max: 255,
     value: 0,
-    step: 1
+    step: 1,
+    link: 2,    //dataArray[x]
+
   },
   {
     id: 'Green',
     min: 0,
     max: 255,
     value: 0,
-    step: 1
+    step: 1,
+    link: 20,    //dataArray[x]
   },
   {
     id: 'Blue',
     min: 0,
     max: 255,
     value: 0,
-    step: 1
+    step: 1,
+    link: 60,    //dataArray[x]
   },
   {
     id: 'Alpha',
     min: 0,
     max: 20,
     value: 5,
-    step: 1
+    step: 1,
+    link: 2,    //dataArray[x]
   },
   {
     id: 'xyIncrement',
@@ -61,24 +67,19 @@ let sliderObjArray = [
     min: 0,
     max: 20,
     value: 4,
-    step: 0.1
-  },
-  {
-    id: 'test34',
-    min: 0,
-    max: 20,
-    value: 1,
-    step: 0.1
+    step: 0.1,
+    link: 70,    //dataArray[x]
   }
 ]
 
 class Slider {
-  constructor(id, min, max, value, step) {
+  constructor(id, min, max, value, step, link) {
     this.id = id;
     this.min = min;
     this.max = max;
     this.value = value;
     this.step = step;
+    this.link = link;
 
   }
 
@@ -98,12 +99,20 @@ class Slider {
     }, false);
   }
 
+  //update slider position and text value when linked to music data array
+  updateLinkedUI() {
+    if (this.link) {
+      this.newValue = map(dataArray[this.link], 0, 255, this.min, this.max)
+      document.getElementById(`${this.id}Slider`).value = this.newValue
+      document.getElementById(`${this.id}Div`).innerText = `${this.id}: ${this.newValue}`
+    }
+  }
 }
 
-// constructor(id, min, max, value, step)
+// create sliders from array
 for (let i = 0; i < sliderObjArray.length; i++) {
 
-  sliderArray[i] = new Slider(sliderObjArray[i].id, sliderObjArray[i].min, sliderObjArray[i].max, sliderObjArray[i].value, sliderObjArray[i].step)
+  sliderArray[i] = new Slider(sliderObjArray[i].id, sliderObjArray[i].min, sliderObjArray[i].max, sliderObjArray[i].value, sliderObjArray[i].step, sliderObjArray[i].link)
   document.getElementById('sliderDiv').insertAdjacentHTML('beforeend', sliderArray[i].render())
   sliderArray[i].eventListen()
 }
