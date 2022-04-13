@@ -3,7 +3,7 @@ let sliderObjArray = [
   {
     id: 'StrokeWeight',
     min: 0,
-    max: 20,
+    max: 30,
     value: 1,
     step: 0.1,
     link: 50,    //dataArray[x]
@@ -51,17 +51,20 @@ let sliderObjArray = [
   },
   {
     id: 'xyIncrement',
-    min: 0,
-    max: 1,
+    // min: 0,
+    min: 0.1,
+    // max: 1,
+    max: 0.05,
     value: 0.1,
-    step: 0.001
-    // link: 90
+    step: 0.001,
+    link: 80
     // ,
     // gradient: 1
   },
   {
     id: 'zoffIncrement',
-    min: 0,
+    // min: 0,
+    min: 0.0001,
     // max: 2,
     max: 0.0005,
     value: 0.0003,

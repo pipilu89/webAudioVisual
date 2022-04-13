@@ -13,10 +13,11 @@ let flowfield
 let backgroundColourVariable = '#000'
 let colorPicker;
 let fileInput;
+let widthOffset = 300
 
 function setup() {
   // createCanvas(canvasW, canvasH);
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth - widthOffset, windowHeight);
   background(backgroundColourVariable)
   cols = floor(width / scl)
   rows = floor(height / scl)
@@ -28,8 +29,8 @@ function setup() {
   backgroundColourVariable = colorPicker.color()
   background(colorPicker.color())
 
-  fileInput = createFileInput(handleFile);
-  fileInput.parent('fileSelectInput');
+  // fileInput = createFileInput(handleFile);
+  // fileInput.parent('fileSelectInput');
 
   fr = createDiv('')
   fr.parent('frameRateDiv');
@@ -53,6 +54,7 @@ function setup() {
     background(colorPicker.color())
     console.log('change background colour');
   }, false);
+
   const defaultValuesBtn = document.getElementById('defaultValuesBtn')
   defaultValuesBtn.addEventListener('click', function () {
     for (let i = 0; i < sliderArray.length; i++) {
@@ -60,6 +62,16 @@ function setup() {
     }
     console.log('defaultValues');
   }, false);
+
+  const resetBtn = document.getElementById('resetBtn')
+  resetBtn.addEventListener('click', function () {
+    for (let i = 0; i < 1000; i++) {
+      particles[i] = new Particle()
+    }
+    console.log('reset');
+  }, false);
+
+
 
 }
 
@@ -149,7 +161,7 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth - widthOffset, windowHeight);
   background(colorPicker.color())
   // console.log('resized window');
 }

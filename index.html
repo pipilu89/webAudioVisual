@@ -16,7 +16,7 @@
 
   <!-- p5 -->
   <div class="controls" id="controls">
-    <div id="fileSelectInput"></div>
+    <div id="fileSelectInput"><input type="file" id="fileDialog" name="fileDialog"></div>
     <div>
       <select id="selectMediaInput">
         <option>Select audio to play</option>
@@ -34,17 +34,7 @@
       </audio>
     </div>
 
-    <!--gain <input type="range" id="volumeInput" min="-1" max="1" value="0" step="0.1">
-    pan
-    <input type="range" id="panner" min="-1" max="1" value="0" step="0.1">
-    fftSize<input type="range" id="fftSize" min="5" max="15" value="11" step="1"> -->
 
-    <!-- <button id="playBtn" data-playing="false" role="switch" aria-checked="false">
-      <span>Play/Pause</span>
-    </button>
-    <button id="mute">
-      <span>mute</span>
-    </button> -->
 
     <button id="linkMusicBtn" data-linked="true" role="switch">
       <span>link/unlink music</span>
@@ -56,21 +46,6 @@
     <hr>
     <div id="sliderDiv"></div>
 
-    <!-- <div id="currentTime">time</div> -->
-    <!-- <button id="updateTime">update time</button> -->
-    <!-- <canvas id="oscilloscope" width="800" height="400"></canvas> -->
-    <!-- <div id="sliderDiv2"></div> -->
-    <!-- <div id="magValue">Mag</div> <input type="range" id="magRange" min="0" max="10" value="1" step="0.1">
-    <div id="redValue">red</div> <input type="range" id="redRange" min="0" max="255" value="0" step="1">
-    <div id="greenValue">green</div> <input type="range" id="greenRange" min="0" max="255" value="0" step="1">
-    <div id="blueValue">blue</div> <input type="range" id="blueRange" min="0" max="255" value="0" step="1">
-    <div id="alphaValue">alpha</div><input type="range" id="alphaRange" min="0" max="255" value="5" step="1">
-    <div id="xyIncrementValue">xyIncrement</div> <input type="range" id="xyIncrementRange" min="0" max="1" value="0.1"
-      step="0.001">
-    <div id="zoffIncrementValue">zoffIncrement </div><input type="range" id="zoffIncrementRange" min="0" max="2"
-      value="0.003" step="0.001">
-    <div id="maxSpeedValue">maxSpeed </div><input type="range" id="maxSpeedRange" min="0" max="20" value="4" step="0.2"> -->
-
     <div>
       <button id="clearBackground">clearBackground</button>
       <button id="defaultValuesBtn">defaultValues</button>
@@ -78,6 +53,10 @@
     <div>
       <button id="backgroundColourSelect">background colour</button>
       <button id="fullScreenBtn">fullScreen</button>
+    </div>
+    <div>
+      <button id="resetBtn">reset particles</button>
+
     </div>
     <div id="frameRateDiv"> </div>
     v0.1
