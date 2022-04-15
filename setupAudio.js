@@ -55,6 +55,7 @@ function changeHandler({
   // Set the src and start loading the audio from the file
   audioElement.src = urlObj;
 
+  // needed for google: https://stackoverflow.com/questions/55026293/google-chrome-javascript-issue-in-getting-user-audio-the-audiocontext-was-not
   audioContext.resume();
 
   // audioElement.load();

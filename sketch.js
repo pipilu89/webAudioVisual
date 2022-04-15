@@ -124,7 +124,7 @@ function draw() {
     // zoffIncLink = map(dataArray[1], 0, 255, 0.0003, 0.001)
 
     //clear background if threshold
-    if (dataArray[3] > 200) {
+    if (dataArray[3] > 250) {
       background(colorPicker.color())
     }
 

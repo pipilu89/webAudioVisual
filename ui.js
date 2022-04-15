@@ -44,7 +44,7 @@ let sliderObjArray = [
   {
     id: 'Alpha',
     min: 0,
-    max: 10,
+    max: 50,
     value: 5,
     step: 1,
     link: 2,    //dataArray[x]
