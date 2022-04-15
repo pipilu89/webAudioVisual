@@ -81,47 +81,10 @@ linkMusicBtn.addEventListener('click', function () {
 
 }, false);
 
-// MEDIA
-// list.onclick = function (e) {
-//   e.preventDefault();
-
-//   var elm = e.target;
-//   var audio = document.getElementById('audio');
-
-//   var source = document.getElementById('audioSource');
-//   source.src = elm.getAttribute('data-value');
-
-//   audio.load(); //call this to just preload the audio without playing
-//   audio.play(); //call this to play the song right away
-// };
-
-// MEDIA2
-const selectMediaInput = document.querySelector("select");
 const audio = document.getElementById("audio1");
-const source = audio.querySelector("source");
-selectMediaInput.onchange = function () {
-  audio.pause();
-  source.src = this.value;
-  audio.load();
-  audio.play();
-}
 
-// const fileDialogBtn = document.getElementById('fileDialog')
-// fileDialogBtn.addEventListener('input', function (e) {
-//   console.log('open file', e, e.target.files[0].type);
-//   console.log('type', e.target.files[0].type);
-//   console.log('name', e.target.files[0].name);
-//   if (e.target.files[0].type === 'audio/mpeg') {
-//     source.src = e.target.files[0].name;
-//     audio.load();
-//     audio.play();
-//     console.log('source.src', source.src);
-//     console.log('file.type =audio');
-//   } else {
-//     console.log('file.type NOT audio');
-//   }
-// }, false);
 
+// https://stackoverflow.com/questions/54932711/display-and-play-audio-file-selected-in-input-javascript
 function changeHandler({
   target
 }) {
@@ -140,15 +103,29 @@ function changeHandler({
   });
 
   // Append the audio element
-  // document.body.appendChild(audio);
+  // document.getElementById("audioDiv").appendChild(audio);
 
   // Allow us to control the audio
-  // audio.controls = "true";
+  audio.controls = "true";
 
   // Set the src and start loading the audio from the file
   audio.src = urlObj;
+  audio.play();
 }
 
 document
   .getElementById("fileDialog")
   .addEventListener("change", changeHandler);
+
+
+// MEDIA2
+const selectMediaInput = document.querySelector("select");
+selectMediaInput.onchange = function () {
+  // audio.pause();
+  console.log('this.value', this.value);
+  audio.src = this.value;
+
+  // source.src = this.value;
+  audio.load();
+  audio.play();
+}

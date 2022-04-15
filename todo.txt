@@ -2,6 +2,8 @@ https://stackoverflow.com/questions/54932711/display-and-play-audio-file-selecte
 
 audio input buggy
 
+try changing scale for improved framerate.
+
 HSL colour for more dynamic change of colour?
 background color change with music intensity?
 instrument frequency chart- another page?
