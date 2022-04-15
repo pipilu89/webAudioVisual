@@ -103,14 +103,15 @@ function changeHandler({
   });
 
   // Append the audio element
-  // document.getElementById("audioDiv").appendChild(audio);
+  document.getElementById("audioDiv").appendChild(audio);
 
   // Allow us to control the audio
   audio.controls = "true";
 
   // Set the src and start loading the audio from the file
   audio.src = urlObj;
-  audio.play();
+  // audio.load();
+  // audio.play();
 }
 
 document
@@ -126,6 +127,14 @@ selectMediaInput.onchange = function () {
   audio.src = this.value;
 
   // source.src = this.value;
-  audio.load();
-  audio.play();
+
+  // audio.load();
+  // audio.play();
 }
+
+function audioChangeHandler() {
+  console.log('audioChangeHandler', this.value);
+}
+document
+  .querySelector("audio")
+  .addEventListener("click", audioChangeHandler);

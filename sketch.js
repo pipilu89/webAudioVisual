@@ -1,5 +1,10 @@
 let xyIncrementRangeValue = 0.1
-let scl = 10
+// let scl = 50 //default 10
+let scl = sliderArray[9].newValue //default 10
+console.log('scl', scl);
+
+let particleQty = sliderArray[10].newValue
+// let particleQty = 100
 let cols, rows
 
 let zoff = 0
@@ -14,14 +19,48 @@ let backgroundColourVariable = '#000'
 let colorPicker;
 let fileInput;
 let widthOffset = 300
+let heightOffset = 0
+
 
 function setup() {
+  console.log('start setup');
   // createCanvas(canvasW, canvasH);
-  createCanvas(windowWidth - widthOffset, windowHeight);
+  createCanvas(windowWidth - widthOffset, windowHeight - heightOffset);
   background(backgroundColourVariable)
+
+  calculateColsRows()
+
+  makeColourPicker()
+
+  fr = createDiv('')
+  fr.parent('frameRateDiv');
+
+
+
+  setupParticlesArray()
+
+}
+
+function calculateColsRows() {
+  scl = sliderArray[9].newValue
   cols = floor(width / scl)
   rows = floor(height / scl)
+  flowfield = new Array(cols * rows)
+  console.log('scl', scl);
+}
 
+function setupParticlesArray() {
+  //reset particle for when setup is re-run
+  particles = []
+  particleQty = sliderArray[10].newValue
+  console.log('particleQty', particleQty);
+
+  for (let i = 0; i < particleQty; i++) {
+    particles[i] = new Particle()
+  }
+}
+
+function makeColourPicker() {
   colorPicker = createColorPicker(backgroundColourVariable)
   colorPicker.id('colourPickerInput');
   colorPicker.parent('frameRateDiv');
@@ -29,54 +68,12 @@ function setup() {
   backgroundColourVariable = colorPicker.color()
   background(colorPicker.color())
 
-  // fileInput = createFileInput(handleFile);
-  // fileInput.parent('fileSelectInput');
-
-  fr = createDiv('')
-  fr.parent('frameRateDiv');
-
-  flowfield = new Array(cols * rows)
-
-  for (let i = 0; i < 1000; i++) {
-    particles[i] = new Particle()
-  }
-
-  //buttons
-  const clearBackgroundBtn = document.getElementById('clearBackground')
-  clearBackgroundBtn.addEventListener('click', function () {
-    background(colorPicker.color())
-    console.log('clear background');
-
-  }, false);
-
   const colourPickerInput = document.getElementById('colourPickerInput')
   colourPickerInput.addEventListener('input', function () {
     background(colorPicker.color())
     console.log('change background colour');
   }, false);
-
-  const defaultValuesBtn = document.getElementById('defaultValuesBtn')
-  defaultValuesBtn.addEventListener('click', function () {
-    for (let i = 0; i < sliderArray.length; i++) {
-      sliderArray[i].defaultValues()
-    }
-    console.log('defaultValues');
-  }, false);
-
-  const resetBtn = document.getElementById('resetBtn')
-  resetBtn.addEventListener('click', function () {
-    for (let i = 0; i < 1000; i++) {
-      particles[i] = new Particle()
-    }
-    console.log('reset');
-  }, false);
-
-
-
 }
-
-
-
 
 function draw() {
   // background(255)
@@ -110,18 +107,20 @@ function draw() {
       // pop()
     }
     yoff += sliderArray[6].newValue
-    if (linked) {
-      // zoff += zoffIncLink
-      zoff += sliderArray[7].newValue
-    }
-    else {
-      zoff += sliderArray[7].newValue
-    }
+    zoff += sliderArray[7].newValue
+
+    // if (linked) {
+    //   // zoff += zoffIncLink
+    //   zoff += sliderArray[7].newValue
+    // }
+    // else {
+    //   zoff += sliderArray[7].newValue
+    // }
   }
 
   if (linked) {
-    speed2 = map(dataArray[20], 0, 255, 1, 16)
-    strokeWeightLink = map(dataArray[32], 0, 255, 1, 20)
+    // speed2 = map(dataArray[20], 0, 255, 1, 16)
+    // strokeWeightLink = map(dataArray[32], 0, 255, 1, 20)
     // zoffIncLink = map(dataArray[1], 0, 255, 0.0003, 0.001)
 
     //clear background if threshold
@@ -161,7 +160,7 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth - widthOffset, windowHeight);
+  resizeCanvas(windowWidth - widthOffset, windowHeight - heightOffset);
   background(colorPicker.color())
   // console.log('resized window');
 }
@@ -176,15 +175,15 @@ fullScreenBtn.addEventListener('click', () => {
 
 
 //file input dialog function
-function handleFile(file) {
-  print(file);
-  if (file.type === 'audio') {
-    source.src = file.data;
-    audio.load();
-    audio.play();
-    console.log('source.src', source.src);
-    console.log('file.type =audio');
-  } else {
-    console.log('file.type NOT audio');
-  }
-}
+// function handleFile(file) {
+//   print(file);
+//   if (file.type === 'audio') {
+//     source.src = file.data;
+//     audio.load();
+//     audio.play();
+//     console.log('source.src', source.src);
+//     console.log('file.type =audio');
+//   } else {
+//     console.log('file.type NOT audio');
+//   }
+// }

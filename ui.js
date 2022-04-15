@@ -54,7 +54,7 @@ let sliderObjArray = [
     // min: 0,
     min: 0.1,
     // max: 1,
-    max: 0.05,
+    max: 0.5,
     value: 0.1,
     step: 0.001,
     link: 80
@@ -78,6 +78,22 @@ let sliderObjArray = [
     value: 4,
     step: 0.1,
     link: 70,    //dataArray[x]
+  },
+  {
+    id: 'scale',
+    min: 10,
+    max: 1000,
+    value: 10,
+    step: 10,
+    // link: 70,    //dataArray[x]
+  },
+  {
+    id: 'particles',
+    min: 0,
+    max: 2000,
+    value: 500,
+    step: 10,
+    particles: 1 //flag linking particle function
   }
 ]
 
@@ -99,13 +115,31 @@ class Slider {
   }
 
   eventListen() {
-
-    /* Event listener */
-    document.getElementById(`${this.id}Slider`).addEventListener("input", (e) => {
-      this.newValue = (e.target.value * 1)
-      // console.log(this.newValue, typeof (this.newValue));
-      document.getElementById(`${this.id}Div`).innerText = `${this.id}:${this.newValue}`
-    }, false);
+    if (this.id == 'particles') {
+      /* Event listener */
+      document.getElementById(`${this.id}Slider`).addEventListener("input", (e) => {
+        this.newValue = (e.target.value * 1)
+        // console.log(this.newValue, typeof (this.newValue));
+        document.getElementById(`${this.id}Div`).innerText = `${this.id}:${this.newValue}`
+        setupParticlesArray()
+      }, false);
+    } else if (this.id == 'scale') {
+      /* Event listener */
+      document.getElementById(`${this.id}Slider`).addEventListener("input", (e) => {
+        this.newValue = (e.target.value * 1)
+        // console.log(this.newValue, typeof (this.newValue));
+        document.getElementById(`${this.id}Div`).innerText = `${this.id}:${this.newValue}`
+        calculateColsRows()
+      }, false);
+    }
+    else {
+      /* Event listener */
+      document.getElementById(`${this.id}Slider`).addEventListener("input", (e) => {
+        this.newValue = (e.target.value * 1)
+        // console.log(this.newValue, typeof (this.newValue));
+        document.getElementById(`${this.id}Div`).innerText = `${this.id}:${this.newValue}`
+      }, false);
+    }
   }
 
   //update slider position and text value when linked to music data array
@@ -115,11 +149,13 @@ class Slider {
       document.getElementById(`${this.id}Slider`).value = this.newValue
       document.getElementById(`${this.id}Div`).innerText = `${this.id}: ${this.newValue.toFixed(5)}`
     }
-    if (this.gradient) {
-      this.newValue = 1
-      document.getElementById(`${this.id}Slider`).value = this.newValue
-      document.getElementById(`${this.id}Div`).innerText = `${this.id}: ${this.newValue}`
-    }
+    // if (this.gradient) {
+    //   this.newValue = 1
+    //   document.getElementById(`${this.id}Slider`).value = this.newValue
+    //   document.getElementById(`${this.id}Div`).innerText = `${this.id}: ${this.newValue}`
+    // }
+
+
   }
 
   //default values
@@ -138,3 +174,37 @@ for (let i = 0; i < sliderObjArray.length; i++) {
   sliderArray[i].eventListen()
 }
 
+//buttons
+const clearBackgroundBtn = document.getElementById('clearBackground')
+clearBackgroundBtn.addEventListener('click', function () {
+  background(colorPicker.color())
+  console.log('clear background');
+
+}, false);
+
+
+
+const defaultValuesBtn = document.getElementById('defaultValuesBtn')
+defaultValuesBtn.addEventListener('click', function () {
+  for (let i = 0; i < sliderArray.length; i++) {
+    sliderArray[i].defaultValues()
+  }
+  console.log('defaultValues');
+}, false);
+
+const resetBtn = document.getElementById('resetBtn')
+resetBtn.addEventListener('click', function () {
+  setupParticlesArray()
+}, false);
+
+const setupBtn = document.getElementById('setupBtn')
+setupBtn.addEventListener('click', function () {
+  setup()
+  // draw()
+}, false);
+
+const sclBtn = document.getElementById('sclBtn')
+sclBtn.addEventListener('click', function () {
+  calculateColsRows()
+  console.log('calculateColsRows');
+}, false);
