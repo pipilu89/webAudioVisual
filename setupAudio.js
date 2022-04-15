@@ -110,7 +110,7 @@ function changeHandler({
 
   // Set the src and start loading the audio from the file
   audio.src = urlObj;
-  // audio.load();
+  audio.load();
   // audio.play();
 }
 
@@ -128,7 +128,7 @@ selectMediaInput.onchange = function () {
 
   // source.src = this.value;
 
-  // audio.load();
+  audio.load();
   // audio.play();
 }
 

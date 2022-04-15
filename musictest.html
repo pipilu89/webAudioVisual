@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="fileSelectInput"><input type="file" id="fileDialog" name="fileDialog"></div>
+  <div id="audioDiv"></div>
+</body>
+<script>
+
+  // https://stackoverflow.com/questions/54932711/display-and-play-audio-file-selected-in-input-javascript
+  function changeHandler({
+    target
+  }) {
+    // Make sure we have files to use
+    if (!target.files.length) return;
+
+    // Create a blob that we can use as an src for our audio element
+    const urlObj = URL.createObjectURL(target.files[0]);
+
+    // Create an audio element
+    const audio = document.createElement("audio");
+
+    // Clean up the URL Object after we are done with it
+    audio.addEventListener("load", () => {
+      URL.revokeObjectURL(urlObj);
+    });
+
+    // Append the audio element
+    document.getElementById("audioDiv").appendChild(audio);
+
+    // Allow us to control the audio
+    audio.controls = "true";
+
+    // Set the src and start loading the audio from the file
+    audio.src = urlObj;
+    // audio.load();
+    // audio.play();
+  }
+
+  document
+    .getElementById("fileDialog")
+    .addEventListener("change", changeHandler);
+
+
+  // MEDIA2
+  // const selectMediaInput = document.querySelector("select");
+  // selectMediaInput.onchange = function () {
+  //   // audio.pause();
+  //   console.log('this.value', this.value);
+  //   audio.src = this.value;
+
+  //   // source.src = this.value;
+
+  //   // audio.load();
+  //   // audio.play();
+  // }
+
+  // function audioChangeHandler() {
+  //   console.log('audioChangeHandler', this.value);
+  // }
+  // document
+  //   .querySelector("audio")
+  //   .addEventListener("click", audioChangeHandler);
+
+</script>
+
+</html>
