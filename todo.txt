@@ -1,6 +1,5 @@
-https://stackoverflow.com/questions/54932711/display-and-play-audio-file-selected-in-input-javascript
 
-audio input buggy
+setaudio html select/controls/filedialog convert from html to js so dont need to add to each html file, the setup audio (or UI) js file will automatically add html tags. Benefits: one place to control common code, less duplicated code.
 
 dl p5 rather than cdn
 
@@ -28,3 +27,7 @@ Done====
 link / unlink music to draw
 link bass frequency to alpha
 select music
+
+https://stackoverflow.com/questions/54932711/display-and-play-audio-file-selected-in-input-javascript
+
+audio input buggy

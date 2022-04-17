@@ -14,7 +14,25 @@
 <body>
   <a href="./index.html">home</a>
   <div id="frameRateDiv"> </div>
+  <div id="audioDiv">
+    <audio id='audio1' controls> </audio>
+    <input type="file" id="fileDialog" name="fileDialog">
+    <select id="selectMediaInput">
+      <option>Select audio to play</option>
+      <option value="./music/JuniorBoys-DoubleShadow.mp3">JuniorBoys-DoubleShadow.mp3</option>
+      <option value="./music/TribeofIssachar-TribalNatty.mp3">TribeofIssachar-TribalNatty.mp3</option>
+      <option value="./music/bensound-creativeminds.mp3">bensound-creativeminds</option>
+    </select>
+    <button id="linkMusicBtn" data-linked="true" role="switch">
+      <span>link/unlink music</span>
+    </button>linked:
+    <span id="linkedInfo">true</span>
+  </div>
+
+  <div id="infoDiv"> </div>
+
 </body>
+<script src="setupAudio.js"></script>
 <script src="./terrain.js"></script>
 
 </html>
