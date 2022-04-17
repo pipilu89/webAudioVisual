@@ -122,7 +122,9 @@ function draw() {
   // textureMode(NORMAL);
   for (let y = 0; y < rows - 1; y++) {
 
-    fill(y, 30 + y, 30 + y, 255 - (y * 7))
+    // fill(y, 30 + y, 30 + y, 255 - (y * 7))
+    fill(y, 30 + y, 30 + y, map(y, 0, rows, 255, 0))
+    map(y, 0, rows, 255, 0)
     beginShape(TRIANGLE_STRIP);
     for (let x = 0; x < cols; x++) {
       // fill(30 + x, x, x, 250 - (x * 5))
