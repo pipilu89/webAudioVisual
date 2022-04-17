@@ -117,13 +117,19 @@ function draw() {
 
   translate(-w / 2, (-h / 2) - upDownTranslate, zTranslate); //center?
 
-  // texture(img);
-  // textureWrap(MIRROR)
-  // textureMode(NORMAL);
+  // rotateX(millis() / 1000);
+  // rotateZ(millis() / 1000);
+  // translate(0, 0, millis() / 100)
+
+  let test = map(sin(millis() / 10), -1, 1, 0, 100)
+  let test2 = map(sin(millis() / 10), -1, 1, -10, 10)
+  rotateY(test2);
+  // console.log(test);
+  translate(0, 0, test)
+
   for (let y = 0; y < rows - 1; y++) {
 
-    // fill(y, 30 + y, 30 + y, 255 - (y * 7))
-    fill(y, 30 + y, 30 + y, map(y, 0, rows, 255, 0))
+    fill(test, 30 + y, 30 + y, map(y, 0, rows, 255, 0))
     map(y, 0, rows, 255, 0)
     beginShape(TRIANGLE_STRIP);
     for (let x = 0; x < cols; x++) {

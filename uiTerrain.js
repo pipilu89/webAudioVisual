@@ -38,8 +38,8 @@ let sliderObjArray = [
   },
   {
     id: 'zTranslate',
-    min: -3000,
-    max: 3000,
+    min: -500,
+    max: 500,
     value: 0,
     value2: -175,
     step: 1,
