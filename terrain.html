@@ -12,24 +12,44 @@
 </head>
 
 <body>
-  <a href="./index.html">home</a>
-  <div id="frameRateDiv"> </div>
-  <div id="audioDiv">
-    <audio id='audio1' controls> </audio>
-    <input type="file" id="fileDialog" name="fileDialog">
-    <select id="selectMediaInput">
-      <option>Select audio to play</option>
-      <option value="./music/JuniorBoys-DoubleShadow.mp3">JuniorBoys-DoubleShadow.mp3</option>
-      <option value="./music/TribeofIssachar-TribalNatty.mp3">TribeofIssachar-TribalNatty.mp3</option>
-      <option value="./music/bensound-creativeminds.mp3">bensound-creativeminds</option>
-    </select>
+
+  <div class="controls" id="controls">
+    <a href="./index.html">home</a>
+
+    <div id="frameRateDiv"> </div>
+    <div id="fileSelectInput"><input type="file" id="fileDialog" name="fileDialog"></div>
+    <div>
+      <select id="selectMediaInput">
+        <option>Select audio to play</option>
+        <option value="./music/JuniorBoys-DoubleShadow.mp3">JuniorBoys-DoubleShadow.mp3</option>
+        <option value="./music/TribeofIssachar-TribalNatty.mp3">TribeofIssachar-TribalNatty.mp3</option>
+        <option value="./music/bensound-creativeminds.mp3">bensound-creativeminds</option>
+      </select>
+    </div>
+
+    <div id="audioDiv">
+      <audio id='audio1' controls style="width: 200px;">
+      </audio>
+    </div>
+
+
+
     <button id="linkMusicBtn" data-linked="true" role="switch">
       <span>link/unlink music</span>
-    </button>linked:
+    </button>
+    linked:
     <span id="linkedInfo">true</span>
-  </div>
 
-  <div id="infoDiv"> </div>
+    <div id="infoDiv"> </div>
+
+    <!-- <button id="strokeBtn" data-stroke="false" role="switch">
+      <span>stroke</span>
+    </button> -->
+    <label class="switch">
+      <input type="checkbox" data-stroke="false" id="strokeBtn">
+      <span class="slider round"></span>
+    </label>stroke
+  </div>
 
 </body>
 <script src="setupAudio.js"></script>
