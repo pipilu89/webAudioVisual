@@ -9,11 +9,13 @@ let flying = 0;
 
 let terrain = [];
 
+let heightOffset = 200
+let widthOffset = 10
 const fr = document.getElementById('frameRateDiv')
 const infoDiv = document.getElementById('infoDiv')
 
 function setup() {
-  createCanvas(1600, 600, WEBGL);
+  createCanvas(windowWidth - widthOffset, windowHeight - heightOffset, WEBGL);
   cols = w / scl;
   rows = h / scl;
   infoDiv.innerText = `cols:${cols}, rows:${rows}`
@@ -102,3 +104,10 @@ function draw() {
 //     yoff += xyinc; //xyinc
 //   }
 // }
+
+
+function windowResized() {
+  resizeCanvas(windowWidth - widthOffset, windowHeight - heightOffset);
+  background(colorPicker.color())
+  // console.log('resized window');
+}
